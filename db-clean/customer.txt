@@ -1,0 +1,3 @@
+insert overwrite table osg_staging.customer select b.* from (select * from look_up_tables.postalcodes) a JOIN (select * from osg_staging.customer) b ON (a.postalcode = b.postalcode and a.city = b.city and a.province_code = b.province);
+
+INSERT OVERWRITE TABLE osg_staging.customer select a.* from (select * from osg_staging.customer) a JOIN (select fullname from osg_staging.customer group by fullname having (count(fullname) = 1)) b ON (a.fullname = b.fullname);

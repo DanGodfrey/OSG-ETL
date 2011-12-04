@@ -1,0 +1,3 @@
+load data local inpath '/Users/cliffordgodfrey/osg-hive/input-data/2011-11-17/postalcodes.csv' into table look_up_tables.postalcodes;
+
+load data local inpath '/Users/cliffordgodfrey/osg-hive/input-data/2011-11-17/tax.csv' into table look_up_tables.provincial_tax_percentage;

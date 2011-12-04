@@ -1,0 +1,13 @@
+Alberta,AB,GST,0,5
+British Columbia,BC,HST,7,12	
+Manitoba,MN,GST+PST,7,12	
+New Brunswick,NB,HST,8,13	
+Newfoundland and Labrador,NL,HST,8,13	
+Northwest Territories,NT,GST,0,5	
+Nova Scotia,NS,HST,10,15	
+Nunavut,NU,GST,0,5	
+Ontario,ON,HST,8,13	
+Prince Edward Island,PE,GST+PST,10.5,15.5
+Quebec,QC,GST+QST,8.925,13.925
+Saskatchewan,SK,GST+PST,5,10
+Yukon,YT,GST,0,5

@@ -1,0 +1,13 @@
+load data local inpath '/Users/cliffordgodfrey/osg-hive/input-data/2011-11-17/customer.csv' into table osg_staging.customer;
+
+load data local inpath '/Users/cliffordgodfrey/osg-hive/input-data/2011-11-17/invoice.csv' into table osg_staging.invoice_details;
+
+load data local inpath '/Users/cliffordgodfrey/osg-hive/input-data/2011-11-17/product.csv' into table osg_staging.product;
+
+load data local inpath '/Users/cliffordgodfrey/osg-hive/input-data/2011-11-17/shipproduct.csv' into table osg_staging.ship_products;
+
+load data local inpath '/Users/cliffordgodfrey/osg-hive/input-data/2011-11-17/shippingdates.csv' into table osg_staging.shipping_dates;
+
+load data local inpath '/Users/cliffordgodfrey/osg-hive/input-data/2011-11-17/transaction.csv' into table osg_staging.transaction;
+
+load data local inpath '/Users/cliffordgodfrey/osg-hive/input-data/2011-11-17/warehouse.csv' into table osg_staging.warehouse;

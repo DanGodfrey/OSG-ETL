@@ -1,0 +1,4 @@
+CREATE TABLE osg_datamart.data_dimension(date_key bigint, fulldate string, date_name string, day_of_week int, day_name_of_week string, day_of_month int, weekday_weekend string, week_of_year int, month_name string, month_of_year int, is_last_day_of_month string, calendar_quarter int, calendar_year int, calendar_year_month string, calendar_year_quarter string, financial_month_of_year int, financial_quarter int, fiscal_year int, fiscal_year_month string, fiscal_year_quarter	string)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

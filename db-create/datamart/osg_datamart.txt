@@ -1,0 +1,1 @@
+CREATE DATABASE osg_datamart;

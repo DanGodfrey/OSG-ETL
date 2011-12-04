@@ -1,0 +1,4 @@
+CREATE TABLE osg_staging.warehouse (ship_from_name	string, ship_from_type string, ship_from_address string, ship_from_city, string, ship_from_province string, ship_from_postalcode string)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

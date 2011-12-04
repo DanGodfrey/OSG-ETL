@@ -1,0 +1,4 @@
+CREATE TABLE look_up_tables.provincial_tax_percentage (province string, province_code string, type string, prov_percent double, total_percent double)
+ROW FORMAT DELIMITED
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

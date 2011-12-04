@@ -1,0 +1,4 @@
+CREATE TABLE osg_datamart.customer_dimension (customer_key bigint, fullname string, address	string, city string, province string, postalcode string, region string, gender string, dob string)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

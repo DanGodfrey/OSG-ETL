@@ -1,0 +1,16 @@
+INSERT OVERWRITE TABLE osg_staging.shipping_dates select invoice_number,
+if(to_date(from_unixtime(unix_timestamp(order_date, "MM/dd/yyyy"))) <> "",to_date(from_unixtime(unix_timestamp(order_date, "MM/dd/yyyy"))), to_date(from_unixtime(unix_timestamp(order_date, "yy-MM-dd")))),
+if(to_date(from_unixtime(unix_timestamp(expect_ship_date, "MM/dd/yyyy"))) <> "",to_date(from_unixtime(unix_timestamp(expect_ship_date, "MM/dd/yyyy"))), to_date(from_unixtime(unix_timestamp(expect_ship_date, "yy-MM-dd")))),
+if(to_date(from_unixtime(unix_timestamp(ship_date, "MM/dd/yyyy"))) <> "",to_date(from_unixtime(unix_timestamp(ship_date, "MM/dd/yyyy"))), to_date(from_unixtime(unix_timestamp(ship_date, "yy-MM-dd")))),
+if(to_date(from_unixtime(unix_timestamp(expect_arrival_date, "MM/dd/yyyy"))) <> "",to_date(from_unixtime(unix_timestamp(expect_arrival_date, "MM/dd/yyyy"))), to_date(from_unixtime(unix_timestamp(expect_arrival_date, "yy-MM-dd")))),
+if(to_date(from_unixtime(unix_timestamp(actual_arrival_date, "MM/dd/yyyy"))) <> "",to_date(from_unixtime(unix_timestamp(actual_arrival_date, "MM/dd/yyyy"))), to_date(from_unixtime(unix_timestamp(actual_arrival_date, "yy-MM-dd")))),
+on_time_count,
+order_complete_count,
+damage_free_count 
+from osg_staging.shipping_dates;
+
+INSERT OVERWRITE TABLE osg_staging.shipping_dates select a.* from (select * from osg_staging.shipping_dates) a JOIN (select invoice_number from osg_staging.shipping_dates group by invoice_number having (count(invoice_number) = 1)) b ON (a.invoice_number = b.invoice_number);
+
+INSERT OVERWRITE TABLE osg_staging.shipping_dates select * from osg_staging.shipping_dates where on_time_count >= 0 AND on_time_count <= 1 AND order_complete_count >=0 AND order_complete_count <=1 AND damage_free_count >=0 AND damage_free_count<=1;
+
+INSERT OVERWRITE TABLE osg_staging.shipping_dates select a.* from (select * from osg_staging.shipping_dates) a JOIN (select * from osg_staging.invoice_details) b ON (a.invoice_number = b.invoice_number);

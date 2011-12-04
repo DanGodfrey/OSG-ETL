@@ -1,0 +1,4 @@
+CREATE TABLE osg_staging.shipping_dates(invoice_number bigint, order_date string, expect_ship_date string, ship_date string, expect_arrival_date string, actual_arrival_date string, on_time_count int, order_complete_count int, damage_free_count int)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

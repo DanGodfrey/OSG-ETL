@@ -1,0 +1,4 @@
+CREATE TABLE osg_datamart.warehouse_dimension (warehouse_key bigint, name	string, type string, address string, city, string, province string, postalcode string)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

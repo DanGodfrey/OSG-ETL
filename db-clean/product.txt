@@ -1,0 +1,3 @@
+INSERT OVERWRITE TABLE osg_staging.product select * from osg_staging.product WHERE description <> "" AND brand <> "" AND subcategory <> "" AND category <> "" AND department<>"" AND package_type<>"" ;
+
+INSERT OVERWRITE TABLE osg_staging.product select a.* from (select * from osg_staging.product) a JOIN (select sku from osg_staging.product group by sku having (count(sku) = 1)) b ON (a.sku = b.sku);

@@ -1,0 +1,4 @@
+CREATE TABLE osg_datamart.shipping_dimension(shipping_key int, invoice_number bigint, invoice_total double, shipping_fees double, on_time int, damage_free int)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

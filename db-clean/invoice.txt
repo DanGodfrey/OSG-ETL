@@ -1,0 +1,5 @@
+INSERT OVERWRITE TABLE osg_staging.invoice_details select a.* from (select * from osg_staging.invoice_details) a JOIN (select * from osg_staging.warehouse) b ON (a.ship_from = b.ship_from_name);
+
+insert overwrite table osg_staging.invoice_details select a.* from (select * from osg_staging.invoice_details) a JOIN (select * from osg_staging.customer) b ON (a.ship_to = b.fullname);
+
+INSERT OVERWRITE TABLE osg_staging.invoice_details select a.* from (select * from osg_staging.invoice_details) a JOIN (select * from osg_staging.transaction) b ON (a.transaction_key = b.transaction_key);

@@ -1,0 +1,4 @@
+CREATE TABLE osg_datamart.product_dimension (product_key bigint, sku bigint, description string, brand string, subcategory string, category string, department string, package_type string)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

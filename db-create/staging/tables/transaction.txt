@@ -1,0 +1,4 @@
+CREATE TABLE osg_staging.transaction (transaction_key int, ship_mode_description string, ship_mode_type string, carrier_name string, carrier_address string, carrier_city string, carrier_province string)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

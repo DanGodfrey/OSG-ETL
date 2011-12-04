@@ -1,0 +1,4 @@
+create table look_up_tables.postalcodes (id int, postalcode string, city string, province string, province_code string, city_type string, latitude double, longitude double) 
+ROW FORMAT DELIMITED
+    FIELDS TERMINATED BY '|'
+    STORED AS TEXTFILE;

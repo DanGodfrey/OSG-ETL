@@ -1,0 +1,4 @@
+CREATE TABLE osg_staging.invoice_details(invoice_number	bigint, sales_price	double, cost_price	double, ship_from string, ship_to	string, transaction_key	int)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

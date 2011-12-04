@@ -1,0 +1,30 @@
+create temporary function row_sequence as 'org.apache.hadoop.hive.contrib.udf.UDFRowSequence'; 
+
+load data local inpath '/Users/cliffordgodfrey/osg-hive/input-data/2011-11-17/date.csv' into table osg_datamart.date_dimension;
+
+INSERT OVERWRITE TABLE osg_datamart.customer_dimension select row_sequence(), * from osg_staging.customer;
+
+INSERT OVERWRITE TABLE osg_datamart.product_dimension select row_sequence(), * from osg_staging.product;
+
+Insert OVERWRITE TABLE osg_datamart.shipping_dimension select row_sequence(), b.invoice_number, b.sales_price * (1 + d.total_percent/100),if(b.sales_price * (1 + d.total_percent/100) > 69.99, 0.00, 5.00),a.on_time_count,a.damage_free_count from (select * from osg_staging.shipping_dates) a JOIN (select * from osg_staging.invoice_details) b ON (a.invoice_number = b.invoice_number) JOIN (select * from osg_staging.customer) c ON (b.ship_to = c.fullname) JOIN (select * from  look_up_tables.provincial_tax_percentage) d ON (c.province = d.province_code);
+
+INSERT OVERWRITE TABLE osg_datamart.transaction_dimension select * from osg_staging.transaction;
+
+INSERT OVERWRITE TABLE osg_datamart.warehouse_dimension select row_sequence(), * from osg_staging.warehouse;
+
+INSERT OVERWRITE TABLE osg_datamart.online_shipment_fact_table SELECT b.date_key, c.date_key, d.date_key, e.date_key, f.date_key, h.product_key, j.customer_key, k.warehouse_key, 
+       i.transaction_key, l.shipping_key, i.sales_price, i.cost_price, i.sales_price * m.total_percent/100, m.total_percent,
+       if(i.sales_price * (1 + m.total_percent/100) > 69.99, 'Y', 'N') 
+FROM (select * from osg_staging.shipping_dates) a 
+    JOIN (select * from osg_datamart.date_dimension) b ON (substr(a.order_date,3) = b.fulldate)
+    JOIN (select * from osg_datamart.date_dimension) c ON (substr(a.ship_date,3) = c.fulldate)
+    JOIN (select * from osg_datamart.date_dimension) d ON (substr(a.expect_ship_date,3) = d.fulldate)
+    JOIN (select * from osg_datamart.date_dimension) e ON (substr(a.expect_arrival_date,3) = e.fulldate)
+    JOIN (select * from osg_datamart.date_dimension) f ON (substr(a.actual_arrival_date,3) = f.fulldate)
+    JOIN (select * from osg_staging.ship_products) g ON (a.invoice_number = g.invoice_number)
+    JOIN (select * from osg_datamart.product_dimension) h ON (g.sku = h.sku)
+    JOIN (select * from osg_staging.invoice_details) i ON (i.invoice_number = a.invoice_number)
+    JOIN (select * from osg_datamart.customer_dimension) j ON (j.fullname = i.ship_to)
+    JOIN (select * from osg_datamart.warehouse_dimension) k ON (k.name = i.ship_from)
+    JOIN (select * from osg_datamart.shipping_dimension) l ON (l.invoice_number = a.invoice_number)
+    JOIN (select * from look_up_tables.provincial_tax_percentage) m ON (m.province_code = j.province);  

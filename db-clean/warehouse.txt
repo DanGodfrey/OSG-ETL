@@ -1,0 +1,1 @@
+INSERT OVERWRITE TABLE osg_staging.warehouse select b.* from (select * from look_up_tables.postalcodes) a JOIN (select * from osg_staging.warehouse) b ON (a.postalcode = b.ship_from_postalcode and a.city = b.ship_from_city and a.province_code = b.ship_from_province);

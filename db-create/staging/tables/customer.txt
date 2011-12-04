@@ -1,0 +1,4 @@
+CREATE TABLE osg_staging.customer (fullname string, address	string, city string, province string, postalcode string, region string, gender string, dob string)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

@@ -1,0 +1,4 @@
+CREATE TABLE osg_datamart.transaction_dimension(transaction_key bigint, transaction_description string, transaction_type string, carrier_name string, carrier_address string, carrier_city string, carrier_province string)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

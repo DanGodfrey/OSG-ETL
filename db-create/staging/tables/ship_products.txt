@@ -1,0 +1,4 @@
+CREATE TABLE osg_staging.ship_product(invoice_number bigint, sku bigint)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;

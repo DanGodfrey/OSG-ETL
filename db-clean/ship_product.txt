@@ -1,0 +1,5 @@
+INSERT OVERWRITE TABLE osg_staging.ship_products SELECT * FROM osg_staging.ship_products WHERE invoice_number IS NOT NULL AND sku IS NOT NULL;
+
+INSERT OVERWRITE TABLE osg_staging.ship_products select a.* from (select * from osg_staging.ship_products) a JOIN (select invoice_number from osg_staging.ship_products group by invoice_number having (count(invoice_number) = 1)) b ON (a.invoice_number = b.invoice_number);
+
+INSERT OVERWRITE TABLE osg_staging.ship_products select a.* from (select * from osg_staging.ship_products) a JOIN (select * from osg_staging.invoice_details) b ON (a.invoice_number = b.invoice_number);

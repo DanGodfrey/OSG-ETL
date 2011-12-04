@@ -1,0 +1,18 @@
+CREATE TABLE osg_datamart.online_shipment_fact_table(order_date_kay	bigint	,
+ship_date_key	bigint	,
+expected_ship_date_key	bigint	,
+expected_arrive_date_key	bigint	,
+actual_arrive_date_key	bigint	,
+product_key	bigint	,
+customer_key	bigint	,
+warehouse_key	bigint	,
+transaction_key	bigint	,
+shipping_key	bigint	,
+sale_price	double	,
+cost_price	double	,
+tax_amount	double	,
+tax_percent	int	,
+free_shipping	string)
+ROW FORMAT DELIMITED 
+    FIELDS TERMINATED BY ','
+    STORED AS TEXTFILE;
